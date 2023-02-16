@@ -278,6 +278,7 @@
             this.btoExcluir.TabIndex = 2;
             this.btoExcluir.Text = "&Excluir";
             this.btoExcluir.UseVisualStyleBackColor = true;
+            this.btoExcluir.Click += new System.EventHandler(this.btoExcluir_Click);
             // 
             // frmMovProduto
             // 

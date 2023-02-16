@@ -57,6 +57,9 @@ namespace MiniProjeto
             txtObs.Text = "";
         }
 
+
+        //////////////////////////////////
+        // BOTÃO CADASTRAR COM PESQUISA //
         private void btoCadastrar_Click(object sender, EventArgs e)
         {
             if (txtCodigoProduto.Text.Trim() == "")
@@ -152,6 +155,8 @@ namespace MiniProjeto
             }
         }
 
+        /////////////////////
+        // BOTÃO PESQUISAR //
         private void btoPesquisar_Click(object sender, EventArgs e)
         {
             string sql = "select * from MovProduto where id_MovProduto = " + txtCodigo.Text;
@@ -189,9 +194,67 @@ namespace MiniProjeto
         // BOTÃO ALTERAR //
         private void btoAlterar_Click(object sender, EventArgs e)
         {
+            string sql = "update MovProduto set " +
+                "id_Produto_MovProduto = '" + txtCodigoProduto.Text + "'," +
+                "id_Usuario_MovProduto = '" + txtCodigoUsuario.Text + "'," +
+                "qtde_MovProduto = '" + txtQtde.Text + "'," +
+                "dataCadastro_MovProduto = '" + txtData.Text + "'," +
+                "obs_MovProduto = '" + txtObs.Text + "'," +
+                "status_MovProduto = '" + cboStatus.Text + "' " +
+                "where id_MovProduto = " + txtCodigo.Text;
 
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.CommandType = CommandType.Text;
+            conn.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                if (i == 1)
+                {
+                    MessageBox.Show("Dados alterados com sucesso.");
+                    btoPesquisar.PerformClick();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
-        
+        ///////////////////
+        // BOTÃO EXCLUIR //
+        private void btoExcluir_Click(object sender, EventArgs e)
+        {
+            string sql = "delete from MovProduto where id_MovProduto = " + txtCodigo.Text;
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.CommandType = CommandType.Text;
+            conn.Open();
+
+            try
+            {
+                int i = cmd.ExecuteNonQuery();
+                if (i == 1)
+                {
+                    MessageBox.Show("Dados excluídos com sucesso.");
+                    btoLimpar.PerformClick();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }
