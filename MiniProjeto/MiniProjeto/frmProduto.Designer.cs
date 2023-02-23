@@ -29,10 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboCodigoCategoria = new System.Windows.Forms.ComboBox();
+            this.cboNomeCategoria = new System.Windows.Forms.ComboBox();
             this.btoPesquisar = new System.Windows.Forms.Button();
-            this.txtCodigoCategoria = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtQuantidade = new System.Windows.Forms.NumericUpDown();
@@ -65,16 +67,35 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboCodigoCategoria);
+            this.groupBox1.Controls.Add(this.cboNomeCategoria);
             this.groupBox1.Controls.Add(this.btoPesquisar);
-            this.groupBox1.Controls.Add(this.txtCodigoCategoria);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.txtCodigo);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(344, 106);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // cboCodigoCategoria
+            // 
+            this.cboCodigoCategoria.Enabled = false;
+            this.cboCodigoCategoria.FormattingEnabled = true;
+            this.cboCodigoCategoria.Location = new System.Drawing.Point(129, 83);
+            this.cboCodigoCategoria.Name = "cboCodigoCategoria";
+            this.cboCodigoCategoria.Size = new System.Drawing.Size(107, 23);
+            this.cboCodigoCategoria.TabIndex = 3;
+            // 
+            // cboNomeCategoria
+            // 
+            this.cboNomeCategoria.FormattingEnabled = true;
+            this.cboNomeCategoria.Location = new System.Drawing.Point(6, 83);
+            this.cboNomeCategoria.Name = "cboNomeCategoria";
+            this.cboNomeCategoria.Size = new System.Drawing.Size(107, 23);
+            this.cboNomeCategoria.TabIndex = 3;
             // 
             // btoPesquisar
             // 
@@ -86,21 +107,14 @@
             this.btoPesquisar.UseVisualStyleBackColor = true;
             this.btoPesquisar.Click += new System.EventHandler(this.btoPesquisar_Click);
             // 
-            // txtCodigoCategoria
+            // label11
             // 
-            this.txtCodigoCategoria.Location = new System.Drawing.Point(6, 83);
-            this.txtCodigoCategoria.Name = "txtCodigoCategoria";
-            this.txtCodigoCategoria.Size = new System.Drawing.Size(116, 23);
-            this.txtCodigoCategoria.TabIndex = 2;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Código da Categoria";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 65);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(58, 15);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Categoria";
             // 
             // txtCodigo
             // 
@@ -108,6 +122,15 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(100, 23);
             this.txtCodigo.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(124, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(116, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Código da Categoria";
             // 
             // label1
             // 
@@ -182,6 +205,7 @@
             this.txtData.Location = new System.Drawing.Point(200, 86);
             this.txtData.Mask = "##/##/####";
             this.txtData.Name = "txtData";
+            this.txtData.ReadOnly = true;
             this.txtData.Size = new System.Drawing.Size(77, 23);
             this.txtData.TabIndex = 4;
             // 
@@ -191,6 +215,8 @@
             this.txtValorVenda.Name = "txtValorVenda";
             this.txtValorVenda.Size = new System.Drawing.Size(92, 23);
             this.txtValorVenda.TabIndex = 3;
+            this.txtValorVenda.Enter += new System.EventHandler(this.txtValorVenda_Enter);
+            this.txtValorVenda.Leave += new System.EventHandler(this.txtValorVenda_Leave);
             // 
             // txtValorCusto
             // 
@@ -198,6 +224,8 @@
             this.txtValorCusto.Name = "txtValorCusto";
             this.txtValorCusto.Size = new System.Drawing.Size(90, 23);
             this.txtValorCusto.TabIndex = 2;
+            this.txtValorCusto.Enter += new System.EventHandler(this.txtValorCusto_Enter);
+            this.txtValorCusto.Leave += new System.EventHandler(this.txtValorCusto_Leave);
             // 
             // label4
             // 
@@ -367,7 +395,6 @@
 
         private GroupBox groupBox1;
         private Button btoPesquisar;
-        private TextBox txtCodigoCategoria;
         private Label label2;
         private TextBox txtCodigo;
         private Label label1;
@@ -394,5 +421,8 @@
         private Button btoAlterar;
         private Button btoExcluir;
         private NumericUpDown txtQuantidade;
+        private ComboBox cboCodigoCategoria;
+        private ComboBox cboNomeCategoria;
+        private Label label11;
     }
 }

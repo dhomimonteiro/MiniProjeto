@@ -121,7 +121,7 @@ create table ItemVenda
 )
 
 select * from usuario
-select * from categoria
+
 select * from produto
 select * from MovProduto
 select * from cliente
