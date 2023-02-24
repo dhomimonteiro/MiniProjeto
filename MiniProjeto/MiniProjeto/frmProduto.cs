@@ -152,6 +152,16 @@ namespace MiniProjeto
         // BOTÃO CADASTRAR COM PESQUISA //
         private void btoCadastrar_Click(object sender, EventArgs e)
         {
+            string vCusto = txtValorCusto.Text;
+            // Exemplo: R$1.000,00
+            vCusto = vCusto.Replace("R$ ", "");// Exemplo: 1.000,00
+            vCusto = vCusto.Replace(".", "");  // Exemplo: 1000,00
+
+            string vVenda = txtValorVenda.Text;
+            // Exemplo: R$1.000,00
+            vVenda = vVenda.Replace("R$ ", "");// Exemplo: 1.000,00
+            vVenda = vVenda.Replace(".", "");  // Exemplo: 1000,00
+
             if (cboNomeCategoria.SelectedIndex == -1)
             {
                 MessageBox.Show("Informe a categoria");
@@ -173,41 +183,41 @@ namespace MiniProjeto
                 return;
             }
             
-            //if (txtValorCusto.Text.Trim() == "")
-            //{
-            //    MessageBox.Show("Preencha o valor de custo");
-            //    txtValorCusto.Focus();
-            //    return;
-            //}
-            //else
-            //{
-            //    float i;
-            //    if (!float.TryParse(txtValorCusto.Text, out i))
-            //    {
-            //        MessageBox.Show("Erro. O valor de custo deve ser numérico");
-            //       txtValorCusto.Text = "";
-            //        txtValorCusto.Focus();
-            //      return;
-            //    }
-            // }
+            if (txtValorCusto.Text.Trim() == "")
+            {
+                MessageBox.Show("Preencha o valor de custo");
+                txtValorCusto.Focus();
+                return;
+            }
+            else
+            {
+                float i;
+                if (!float.TryParse(vCusto, out i))
+                {
+                    MessageBox.Show("Erro. O valor de custo deve ser numérico");
+                   txtValorCusto.Text = "";
+                    txtValorCusto.Focus();
+                  return;
+                }
+             }
 
-            //if (txtValorVenda.Text.Trim() == "")
-            //{
-            //   MessageBox.Show("Preencha o valor de custo");
-            //    txtValorVenda.Focus();
-            //    return;
-            //}
-            //else
-            //{
-            //    float i;
-            //    if (!float.TryParse(txtValorVenda.Text, out i))
-            //    {
-            //        MessageBox.Show("Erro. O valor de custo deve ser numérico");
-            //        txtValorVenda.Text = "";
-            //        txtValorVenda.Focus();
-            //        return;
-            //    }
-            //}
+            if (txtValorVenda.Text.Trim() == "")
+            {
+                MessageBox.Show("Preencha o valor de custo");
+                txtValorVenda.Focus();
+                return;
+            }
+            else
+            {
+                float i;
+                if (!float.TryParse(vVenda, out i))
+                {
+                    MessageBox.Show("Erro. O valor de custo deve ser numérico");
+                    txtValorVenda.Text = "";
+                    txtValorVenda.Focus();
+                    return;
+                }
+            }
 
             if (cboStatus.SelectedIndex == -1)
             {
@@ -216,18 +226,8 @@ namespace MiniProjeto
                 return;
             }
 
-            string vCusto = txtValorCusto.Text;
-                                               // Exemplo: R$1.000,00
-            vCusto = vCusto.Replace("R$ ", "");// Exemplo: 1.000,00
-            vCusto = vCusto.Replace(".", "");  // Exemplo: 1000,00
             vCusto = vCusto.Replace(",", "."); // Exemplo: 1000.00 = formato correto para o banco de dados
-
-            string vVenda = txtValorVenda.Text;
-                                               // Exemplo: R$1.000,00
-            vVenda = vVenda.Replace("R$ ", "");// Exemplo: 1.000,00
-            vVenda = vVenda.Replace(".", "");  // Exemplo: 1000,00
             vVenda = vVenda.Replace(",", "."); // Exemplo: 1000.00 = formato correto para o banco de dados
-
 
             string sql = "insert into produto " + 
             "(nome_Produto, id_Categoria_Produto, valorcusto_Produto, valorvenda_Produto, descricao_Produto, qtde_Produto, obs_Produto, status_Produto)" +
@@ -280,8 +280,13 @@ namespace MiniProjeto
                 {
                     txtNome.Text = leitura[1].ToString();
                     cboCodigoCategoria.Text = leitura[2].ToString();
+
                     txtValorCusto.Text = leitura[3].ToString();
+                    txtValorCusto.Text = String.Format("{0:C}", float.Parse(txtValorCusto.Text));
+
                     txtValorVenda.Text = leitura[4].ToString();
+                    txtValorVenda.Text = String.Format("{0:C}", float.Parse(txtValorVenda.Text));
+
                     txtDescricao.Text = leitura[5].ToString();
                     txtQuantidade.Text = leitura[6].ToString();
                     txtData.Text = leitura[7].ToString();
@@ -303,6 +308,17 @@ namespace MiniProjeto
         // BOTÃO ALTERAR //
         private void btoAlterar_Click(object sender, EventArgs e)
         {
+            string vCusto = txtValorCusto.Text;
+            // Exemplo: R$1.000,00
+            vCusto = vCusto.Replace("R$ ", "");// Exemplo: 1.000,00
+            vCusto = vCusto.Replace(".", "");  // Exemplo: 1000,00
+            
+
+            string vVenda = txtValorVenda.Text;
+            // Exemplo: R$1.000,00
+            vVenda = vVenda.Replace("R$ ", "");// Exemplo: 1.000,00
+            vVenda = vVenda.Replace(".", "");  // Exemplo: 1000,00
+
             if (txtCodigo.Text.Trim() == "")
             {
                 MessageBox.Show("Informe o código do produto.");
@@ -339,8 +355,9 @@ namespace MiniProjeto
             }
             else
             {
+                
                 float i;
-                if (!float.TryParse(txtValorCusto.Text, out i))
+                if (!float.TryParse(vCusto, out i))
                 {
                     MessageBox.Show("Erro. O valor de custo deve ser numérico");
                     txtValorCusto.Text = "";
@@ -357,8 +374,9 @@ namespace MiniProjeto
             }
             else
             {
+                txtValorVenda.Text.Replace("R$ ", "");
                 float i;
-                if (!float.TryParse(txtValorVenda.Text, out i))
+                if (!float.TryParse(vVenda, out i))
                 {
                     MessageBox.Show("Erro. O valor de custo deve ser numérico.");
                     txtValorVenda.Text = "";
@@ -374,12 +392,16 @@ namespace MiniProjeto
                 return;
             }
 
+            vCusto = vCusto.Replace(",", "."); // Exemplo: 1000.00 = formato correto para o banco de dados
+            vVenda = vVenda.Replace(",", "."); // Exemplo: 1000.00 = formato correto para o banco de dados
+
+
             string sql = "set dateformat dmy update produto set " +
                 "id_Categoria_Produto = " + cboCodigoCategoria.Text + "," +
                 "nome_Produto = '" + txtNome.Text + "'," +
                 // .Replace(oldchar, newchar) > altera um caracter.
-                "valorcusto_Produto = " + txtValorCusto.Text.Replace(",",".") + "," +
-                "valorvenda_Produto = " + txtValorVenda.Text.Replace(",", ".") + "," +
+                "valorcusto_Produto = " + vCusto + "," +
+                "valorvenda_Produto = " + vVenda + "," +
                 "descricao_Produto = '" + txtDescricao.Text + "'," +
                 "qtde_Produto = " + txtQuantidade.Value + "," +
                 "dataCadastro_Produto = '" + txtData.Text + "'," +

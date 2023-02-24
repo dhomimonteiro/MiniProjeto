@@ -31,6 +31,75 @@ namespace MiniProjeto
             }
         }
 
+        private void carregarComboBoxUser()
+        {
+            string sql = "select id_Usuario, nome_Usuario from usuario";
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.CommandType = CommandType.Text;
+            SqlDataReader leitura;
+            DataTable dt = new DataTable();
+            conn.Open();
+
+            try
+            {
+                leitura = cmd.ExecuteReader();
+                dt.Load(leitura);
+
+                cboCodigoUsuario.DisplayMember = "id_Usuario";
+                cboCodigoUsuario.DataSource = dt;
+
+                cboNomeUsuario.DisplayMember = "nome_Usuario";
+                cboNomeUsuario.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void carregarComboBoxProduto()
+        {
+            string sql = "select id_Produto, nome_Produto, qtde_Produto from produto";
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            cmd.CommandType = CommandType.Text;
+            SqlDataReader leitura;
+            DataTable dt = new DataTable();
+            conn.Open();
+
+            try
+            {
+                leitura = cmd.ExecuteReader();
+                dt.Load(leitura);
+
+                cboCodigoProduto.DisplayMember = "id_Produto";
+                cboCodigoProduto.DataSource = dt;
+
+                cboNomeProduto.DisplayMember = "nome_Produto";
+                cboNomeProduto.DataSource = dt;
+
+                cboQtdeEstoque.DisplayMember = "qtde_Produto";
+                cboQtdeEstoque.DataSource = dt;
+
+                //txtQtdeEstoque.Text = leitura[6].ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public frmMovProduto()
         {
             InitializeComponent();
@@ -39,6 +108,8 @@ namespace MiniProjeto
         private void frmMovProduto_Load(object sender, EventArgs e)
         {
             testeConexao();
+            carregarComboBoxUser();
+            carregarComboBoxProduto();
         }
 
         private void btoSair_Click(object sender, EventArgs e)
@@ -49,8 +120,12 @@ namespace MiniProjeto
         private void btoLimpar_Click(object sender, EventArgs e)
         {
             txtCodigo.Text = "";
-            txtCodigoProduto.Text = "";
-            txtCodigoUsuario.Text = "";
+            cboNomeProduto.SelectedIndex = -1;
+            cboCodigoProduto.SelectedIndex = -1;
+            cboNomeUsuario.SelectedIndex = -1;
+            cboCodigoUsuario.SelectedIndex = -1;
+            cboQtdeEstoque.SelectedIndex = -1;
+            cboTipoMov.SelectedIndex = -1;
             txtQtde.Value = 0;
             txtData.Text = "";
             cboStatus.SelectedIndex = -1;
@@ -62,50 +137,30 @@ namespace MiniProjeto
         // BOTÃO CADASTRAR COM PESQUISA //
         private void btoCadastrar_Click(object sender, EventArgs e)
         {
-            if (txtCodigoProduto.Text.Trim() == "")
+            if (cboNomeProduto.SelectedIndex == -1)
             {
-                MessageBox.Show("Informe o código do produto.");
-                txtCodigoProduto.Focus();
+                MessageBox.Show("Informe o nome do produto.");
+                cboNomeProduto.Focus();
                 return;
             }
-            else
+            
+            if (cboNomeUsuario.SelectedIndex == -1)
             {
-                float i;
-                if (!float.TryParse(txtCodigoProduto.Text, out i))
-                {
-                    MessageBox.Show("Erro. O código do produto deve ser numérico");
-                    txtCodigoProduto.Text = "";
-                    txtCodigoProduto.Focus();
-                    return;
-                }
-            }
-            if (txtCodigoUsuario.Text.Trim() == "")
-            {
-                MessageBox.Show("Informe o código do usuário.");
-                txtCodigoUsuario.Focus();
+                MessageBox.Show("Informe o nome do usuário.");
+                cboNomeUsuario.Focus();
                 return;
             }
-            else
+            if (cboTipoMov.SelectedIndex == -1)
             {
-                float i;
-                if (!float.TryParse(txtCodigoUsuario.Text, out i))
-                {
-                    MessageBox.Show("Erro. O código do usuário deve ser numérico");
-                    txtCodigoUsuario.Text = "";
-                    txtCodigoUsuario.Focus();
-                    return;
-                }
+                MessageBox.Show("Informe o tipo de movimentação.");
+                cboTipoMov.Focus();
+                return;
             }
 
             if (txtQtde.Value == 0)
             {
                 MessageBox.Show("A quantidade deve ser maior que 0.");
                 txtQtde.Focus();
-                return;
-            }else if (txtData.Text == "  /  /")
-            {
-                MessageBox.Show("Insira a data.");
-                txtData.Focus();
                 return;
             }else if (cboStatus.SelectedIndex == -1)
             {
@@ -114,17 +169,21 @@ namespace MiniProjeto
                 return;
             }
 
-
-            string sql = "set dateformat dmy " +
-                "insert into MovProduto" +
+            string sql = "insert into MovProduto" +
                 "(" +
-                "id_Produto_MovProduto," + "id_Usuario_MovProduto," + "qtde_MovProduto," + "dataCadastro_MovProduto," +
-                "obs_MovProduto," + "status_MovProduto" + ")" +
-                "values" + "(" +
-                txtCodigoProduto.Text + "," +
-                txtCodigoUsuario.Text + "," +
+                "id_Produto_MovProduto," + 
+                "id_Usuario_MovProduto," +
+                "tipo_MovProduto," +
+                "qtde_MovProduto," + 
+                "obs_MovProduto," + 
+                "status_MovProduto" + 
+                ")" +
+                "values" + 
+                "(" +
+                cboCodigoProduto.Text + "," +
+                cboCodigoUsuario.Text + "," +
+                "'" + cboTipoMov.Text + "'," +
                 txtQtde.Text + "," +
-                "'" + txtData.Text + "'," +
                 "'" + txtObs.Text + "'," +
                 "'" + cboStatus.Text + "')" +
                 "select SCOPE_IDENTITY()";
@@ -140,9 +199,11 @@ namespace MiniProjeto
                 leitura = cmd.ExecuteReader();
                 if (leitura.Read())
                 {
-                    btoLimpar.PerformClick();
+                    
                     MessageBox.Show("Dados cadastrados com sucesso. Código gerido: " + leitura[0].ToString());
                     txtCodigo.Text = leitura[0].ToString();
+                    btoPesquisar.PerformClick();
+
                 }
             }
             catch (Exception ex)
@@ -152,6 +213,65 @@ namespace MiniProjeto
             finally
             {
                 conn.Close();
+            }
+
+            if (cboTipoMov.SelectedIndex == 0)
+            {
+                string sqlAdicionar = "update produto set qtde_produto = qtde_produto + " + txtQtde.Text + " where id_Produto = " + cboCodigoProduto.Text;
+
+                //SqlConnection connAdd = new SqlConnection(stringConexao);
+                SqlCommand cmdAdd = new SqlCommand(sqlAdicionar, conn);
+                cmdAdd.CommandType = CommandType.Text;
+                conn.Open();
+
+                try
+                {
+                    int i = cmdAdd.ExecuteNonQuery();
+                    if (i == 1)
+                    {
+                        MessageBox.Show("Dados alterados com sucesso.");
+                        btoLimpar.PerformClick();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            if (cboTipoMov.SelectedIndex == 1)
+            {
+                string sqlRemover = "update produto set " +
+                    "qtde_Produto = qtde_Produto - " + txtQtde.Text + " where id_Produto = " +
+                    cboCodigoProduto.Text;
+
+                SqlConnection connRm = new SqlConnection(stringConexao);
+                SqlCommand cmdRm = new SqlCommand(sqlRemover, connRm);
+                cmdRm.CommandType = CommandType.Text;
+                connRm.Open();
+
+                try
+                {
+                    int i = cmdRm.ExecuteNonQuery();
+                    if (i == 1)
+                    {
+                        MessageBox.Show("Dados alterados com sucesso.");
+                        btoLimpar.PerformClick();
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    connRm.Close();
+                }
             }
         }
 
@@ -172,12 +292,13 @@ namespace MiniProjeto
                 leitura = cmd.ExecuteReader();
                 if (leitura.Read())
                 {
-                    txtCodigoProduto.Text = leitura[1].ToString();
-                    txtCodigoUsuario.Text = leitura[2].ToString();
-                    txtQtde.Text = leitura[3].ToString();
-                    txtData.Text = leitura[4].ToString();
-                    txtObs.Text = leitura[5].ToString();
-                    cboStatus.SelectedItem = leitura[6].ToString();
+                    cboCodigoProduto.Text = leitura[1].ToString();
+                    cboCodigoUsuario.Text = leitura[2].ToString();
+                    cboTipoMov.SelectedItem = leitura[3].ToString();
+                    txtQtde.Text = leitura[4].ToString();
+                    txtData.Text = leitura[5].ToString();
+                    txtObs.Text = leitura[6].ToString();
+                    cboStatus.SelectedItem = leitura[7].ToString();
                 }
             }
             catch (Exception ex)
@@ -195,8 +316,8 @@ namespace MiniProjeto
         private void btoAlterar_Click(object sender, EventArgs e)
         {
             string sql = "update MovProduto set " +
-                "id_Produto_MovProduto = '" + txtCodigoProduto.Text + "'," +
-                "id_Usuario_MovProduto = '" + txtCodigoUsuario.Text + "'," +
+                "id_Produto_MovProduto = '" + cboCodigoProduto.Text + "'," +
+                "id_Usuario_MovProduto = '" + cboCodigoUsuario.Text + "'," +
                 "qtde_MovProduto = '" + txtQtde.Text + "'," +
                 "dataCadastro_MovProduto = '" + txtData.Text + "'," +
                 "obs_MovProduto = '" + txtObs.Text + "'," +
