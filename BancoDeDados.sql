@@ -60,11 +60,15 @@ select * from produto
  
 drop table produto
 
+update produto set qtde_produto = qtde_produto + 1 where id_Produto = 1;
+update produto set qtde_produto = qtde_produto - 1 where id_Produto = 1;
+
 create table MovProduto
 (
 	id_MovProduto int not null identity,
 	id_Produto_MovProduto int not null,
 	id_Usuario_MovProduto int not null,
+	tipo_MovProduto varchar(30) not null,
 	qtde_MovProduto	int	not null,
 	dataCadastro_MovProduto	smalldatetime not null default getdate(),
 	obs_MovProduto varchar(255) null,
@@ -74,8 +78,9 @@ create table MovProduto
 	constraint FK_Id_Usuario_MovProduto foreign key (id_Usuario_MovProduto) references usuario (id_Usuario)
 )
 
-
 select * from MovProduto
+
+drop table MovProduto
 
 create table cliente
 (
