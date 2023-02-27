@@ -6,7 +6,7 @@ namespace MiniProjeto
     public partial class frmUsuario : Form
     {
         // Cria uma conexão para o banco de dados
-        string stringConexao = "Data Source=localhost; Initial Catalog=MiniProjeto_T13;User ID= sa; Password=123456";
+        string stringConexao = frmLogin.stringConexao;
 
         // Teste de erro com o banco de dados
         private void TesteConexao()
@@ -34,7 +34,7 @@ namespace MiniProjeto
 
         private void btoSair_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void btoLimpar_Click(object sender, EventArgs e)

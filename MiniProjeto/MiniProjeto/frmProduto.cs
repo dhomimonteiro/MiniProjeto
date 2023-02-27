@@ -14,7 +14,7 @@ namespace MiniProjeto
     public partial class frmProduto : Form
     {
 
-        string stringConexao = "Data Source=localhost; Initial Catalog=MiniProjeto_T13;User ID= sa; Password=123456";
+        string stringConexao = frmLogin.stringConexao;
 
         private void testeConexao()
         {
@@ -75,7 +75,7 @@ namespace MiniProjeto
 
         private void btoSair_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         private void frmProduto_Load(object sender, EventArgs e)
