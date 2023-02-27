@@ -33,6 +33,37 @@ namespace MiniProjeto
             }
         }
 
+        private void CarregarGridCategoria()
+        {
+            string sql = "select " +
+                "id_Categoria as 'ID', " +
+                "nome_Categoria as 'Nome', " +
+                "status_Categoria as 'Status' " +
+                "from categoria where " +
+                "nome_Categoria like '%" + txtNomePesquisar.Text + "%'";
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            DataSet ds = new DataSet();
+            conn.Open();
+
+            try
+            {
+                adapter.Fill(ds);
+                gridCategoria.DataSource = ds.Tables[0];
+                gridCategoria.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                gridCategoria.AutoResizeRow(0,DataGridViewAutoSizeRowMode.AllCellsExceptHeader);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public frmCategoria()
         {
             InitializeComponent();
@@ -55,6 +86,7 @@ namespace MiniProjeto
         private void frmCategoria_Load(object sender, EventArgs e)
         {
             testeConexao();
+            CarregarGridCategoria();
         }
 
         //////////////////////////////////
@@ -108,6 +140,8 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+
+            CarregarGridCategoria();
         }
 
         /////////////////////
@@ -195,6 +229,8 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+
+            CarregarGridCategoria();
         }
 
         ///////////////////
@@ -225,6 +261,19 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+
+            CarregarGridCategoria();
+        }
+
+        private void txtNomePesquisar_TextChanged(object sender, EventArgs e)
+        {
+            CarregarGridCategoria();
+        }
+
+        private void gridCategoria_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtCodigo.Text = gridCategoria.CurrentRow.Cells["ID"].Value.ToString();
+            btoPesquisar.PerformClick();
         }
     }
 }

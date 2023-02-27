@@ -51,10 +51,13 @@
             this.txtConfirmarSenha = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtNomePesquisa = new System.Windows.Forms.TextBox();
+            this.gridUsuario = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtId)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridUsuario)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -222,7 +225,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(511, 91);
+            this.groupBox1.Size = new System.Drawing.Size(388, 91);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -240,7 +243,7 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(12, 109);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(511, 225);
+            this.groupBox2.Size = new System.Drawing.Size(388, 225);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -282,16 +285,38 @@
             this.groupBox3.Controls.Add(this.btoAlterar);
             this.groupBox3.Location = new System.Drawing.Point(12, 340);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(511, 122);
+            this.groupBox3.Size = new System.Drawing.Size(388, 122);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
+            // 
+            // txtNomePesquisa
+            // 
+            this.txtNomePesquisa.Location = new System.Drawing.Point(12, 468);
+            this.txtNomePesquisa.Name = "txtNomePesquisa";
+            this.txtNomePesquisa.Size = new System.Drawing.Size(387, 23);
+            this.txtNomePesquisa.TabIndex = 4;
+            this.txtNomePesquisa.TextChanged += new System.EventHandler(this.txtNomePesquisa_TextChanged);
+            // 
+            // gridUsuario
+            // 
+            this.gridUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridUsuario.Location = new System.Drawing.Point(12, 497);
+            this.gridUsuario.Name = "gridUsuario";
+            this.gridUsuario.ReadOnly = true;
+            this.gridUsuario.RowTemplate.Height = 25;
+            this.gridUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridUsuario.Size = new System.Drawing.Size(387, 137);
+            this.gridUsuario.TabIndex = 5;
+            this.gridUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUsuario_CellClick);
             // 
             // frmUsuario
             // 
             this.AcceptButton = this.btoCadastrar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 474);
+            this.ClientSize = new System.Drawing.Size(411, 641);
+            this.Controls.Add(this.gridUsuario);
+            this.Controls.Add(this.txtNomePesquisa);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -305,7 +330,9 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridUsuario)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -334,5 +361,7 @@
         private TextBox txtConfirmarSenha;
         private Label label7;
         private GroupBox groupBox3;
+        private TextBox txtNomePesquisa;
+        private DataGridView gridUsuario;
     }
 }

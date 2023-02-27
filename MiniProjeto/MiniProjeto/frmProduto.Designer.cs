@@ -59,10 +59,13 @@
             this.btoCadastrar = new System.Windows.Forms.Button();
             this.btoAlterar = new System.Windows.Forms.Button();
             this.btoExcluir = new System.Windows.Forms.Button();
+            this.txtNomePesquisa = new System.Windows.Forms.TextBox();
+            this.gridProduto = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduto)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -369,11 +372,33 @@
             this.btoExcluir.UseVisualStyleBackColor = true;
             this.btoExcluir.Click += new System.EventHandler(this.btoExcluir_Click);
             // 
+            // txtNomePesquisa
+            // 
+            this.txtNomePesquisa.Location = new System.Drawing.Point(12, 505);
+            this.txtNomePesquisa.Name = "txtNomePesquisa";
+            this.txtNomePesquisa.Size = new System.Drawing.Size(344, 23);
+            this.txtNomePesquisa.TabIndex = 3;
+            this.txtNomePesquisa.TextChanged += new System.EventHandler(this.txtNomePesquisa_TextChanged);
+            // 
+            // gridProduto
+            // 
+            this.gridProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridProduto.Location = new System.Drawing.Point(12, 534);
+            this.gridProduto.Name = "gridProduto";
+            this.gridProduto.ReadOnly = true;
+            this.gridProduto.RowTemplate.Height = 25;
+            this.gridProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridProduto.Size = new System.Drawing.Size(344, 145);
+            this.gridProduto.TabIndex = 4;
+            this.gridProduto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridProduto_CellClick);
+            // 
             // frmProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 511);
+            this.ClientSize = new System.Drawing.Size(368, 691);
+            this.Controls.Add(this.gridProduto);
+            this.Controls.Add(this.txtNomePesquisa);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -387,7 +412,9 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtQuantidade)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridProduto)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -424,5 +451,7 @@
         private ComboBox cboCodigoCategoria;
         private ComboBox cboNomeCategoria;
         private Label label11;
+        private TextBox txtNomePesquisa;
+        private DataGridView gridProduto;
     }
 }

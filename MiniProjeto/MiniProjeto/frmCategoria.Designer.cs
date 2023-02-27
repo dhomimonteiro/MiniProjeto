@@ -48,9 +48,12 @@
             this.btoExcluir = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.btoAlterar = new System.Windows.Forms.Button();
+            this.txtNomePesquisar = new System.Windows.Forms.TextBox();
+            this.gridCategoria = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCategoria)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -250,13 +253,35 @@
             this.btoAlterar.UseVisualStyleBackColor = true;
             this.btoAlterar.Click += new System.EventHandler(this.btoAlterar_Click);
             // 
+            // txtNomePesquisar
+            // 
+            this.txtNomePesquisar.Location = new System.Drawing.Point(12, 472);
+            this.txtNomePesquisar.Name = "txtNomePesquisar";
+            this.txtNomePesquisar.Size = new System.Drawing.Size(369, 23);
+            this.txtNomePesquisar.TabIndex = 3;
+            this.txtNomePesquisar.TextChanged += new System.EventHandler(this.txtNomePesquisar_TextChanged);
+            // 
+            // gridCategoria
+            // 
+            this.gridCategoria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridCategoria.Location = new System.Drawing.Point(12, 501);
+            this.gridCategoria.Name = "gridCategoria";
+            this.gridCategoria.ReadOnly = true;
+            this.gridCategoria.RowTemplate.Height = 25;
+            this.gridCategoria.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridCategoria.Size = new System.Drawing.Size(369, 143);
+            this.gridCategoria.TabIndex = 4;
+            this.gridCategoria.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCategoria_CellClick);
+            // 
             // frmCategoria
             // 
             this.AcceptButton = this.btoCadastrar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btoSair;
-            this.ClientSize = new System.Drawing.Size(396, 478);
+            this.ClientSize = new System.Drawing.Size(396, 656);
+            this.Controls.Add(this.gridCategoria);
+            this.Controls.Add(this.txtNomePesquisar);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -269,7 +294,9 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridCategoria)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -295,5 +322,7 @@
         private Button button3;
         private Button btoAlterar;
         private ComboBox cboStatus;
+        private TextBox txtNomePesquisar;
+        private DataGridView gridCategoria;
     }
 }

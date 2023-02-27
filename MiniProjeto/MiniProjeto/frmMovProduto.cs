@@ -100,6 +100,38 @@ namespace MiniProjeto
             }
         }
 
+        private void CarregarGridMovProduto()
+        {
+            string sql = "select " +
+                "id_MovProduto as 'ID', " +
+                "tipo_MovProduto as 'Movimento', " +
+                "qtde_MovProduto as 'Quantidade', " +
+                "status_MovProduto as 'Status' " +
+                "from MovProduto where " +
+                "tipo_MovProduto like '%" + txtNomePesquisar.Text + "%'";
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlDataAdapter adapter = new SqlDataAdapter(sql,conn);
+            DataSet ds = new DataSet();
+            conn.Open();
+
+            try
+            {
+                adapter.Fill(ds);
+                gridMovProduto.DataSource = ds.Tables[0];
+                gridMovProduto.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                gridMovProduto.AutoResizeRow(0, DataGridViewAutoSizeRowMode.AllCellsExceptHeader);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public frmMovProduto()
         {
             InitializeComponent();
@@ -110,6 +142,7 @@ namespace MiniProjeto
             testeConexao();
             carregarComboBoxUser();
             carregarComboBoxProduto();
+            CarregarGridMovProduto();
         }
 
         private void btoSair_Click(object sender, EventArgs e)
@@ -376,6 +409,17 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+        }
+
+        private void txtNomePesquisar_TextChanged(object sender, EventArgs e)
+        {
+            CarregarGridMovProduto();
+        }
+
+        private void gridMovProduto_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtCodigo.Text = gridMovProduto.CurrentRow.Cells["ID"].Value.ToString();
+            btoPesquisar.PerformClick();
         }
     }
 }

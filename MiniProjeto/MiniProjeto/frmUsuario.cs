@@ -26,7 +26,6 @@ namespace MiniProjeto
             }
 
         }
-
         public frmUsuario()
         {
             InitializeComponent();
@@ -49,9 +48,42 @@ namespace MiniProjeto
             txtObs.Text = "";
         }
 
+        private void CarregarGridUsuario()
+        {
+            string sql = "select " +
+                "id_Usuario as 'ID', " +
+                "nome_Usuario as 'Nome', " +
+                "login_Usuario as 'Login', " +
+                "status_Usuario as 'Status' " +
+                "from usuario where " +
+                "nome_Usuario like '%" + txtNomePesquisa.Text + "%'";
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            DataSet ds = new DataSet();
+            conn.Open();
+
+            try
+            {
+                adapter.Fill(ds);
+                gridUsuario.DataSource = ds.Tables[0];
+                gridUsuario.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                gridUsuario.AutoResizeRow(0, DataGridViewAutoSizeRowMode.AllCellsExceptHeader);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         private void frmUsuario_Load(object sender, EventArgs e)
         {
             TesteConexao();
+            CarregarGridUsuario();
         }
 
 
@@ -141,6 +173,8 @@ namespace MiniProjeto
             txtConfirmarSenha.Text = "";
             cboStatus.SelectedIndex = -1;
             txtObs.Text = "";
+
+            CarregarGridUsuario();
 
         }
 
@@ -264,6 +298,7 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+            CarregarGridUsuario();
         }
 
         ///////////////////
@@ -294,6 +329,19 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+
+            CarregarGridUsuario();
+        }
+
+        private void txtNomePesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarGridUsuario();
+        }
+
+        private void gridUsuario_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtId.Text = gridUsuario.CurrentRow.Cells["ID"].Value.ToString();
+            btoPesquisar.PerformClick();
         }
     }
 }

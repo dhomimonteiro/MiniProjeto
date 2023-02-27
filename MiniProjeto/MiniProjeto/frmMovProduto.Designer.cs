@@ -37,6 +37,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cboQtdeEstoque = new System.Windows.Forms.ComboBox();
             this.cboTipoMov = new System.Windows.Forms.ComboBox();
             this.cboCodigoProduto = new System.Windows.Forms.ComboBox();
             this.cboCodigoUsuario = new System.Windows.Forms.ComboBox();
@@ -58,11 +59,13 @@
             this.btoLimpar = new System.Windows.Forms.Button();
             this.btoSair = new System.Windows.Forms.Button();
             this.btoExcluir = new System.Windows.Forms.Button();
-            this.cboQtdeEstoque = new System.Windows.Forms.ComboBox();
+            this.txtNomePesquisar = new System.Windows.Forms.TextBox();
+            this.gridMovProduto = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtQtde)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridMovProduto)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -166,6 +169,15 @@
             this.groupBox2.Size = new System.Drawing.Size(505, 202);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // cboQtdeEstoque
+            // 
+            this.cboQtdeEstoque.Enabled = false;
+            this.cboQtdeEstoque.FormattingEnabled = true;
+            this.cboQtdeEstoque.Location = new System.Drawing.Point(6, 72);
+            this.cboQtdeEstoque.Name = "cboQtdeEstoque";
+            this.cboQtdeEstoque.Size = new System.Drawing.Size(100, 23);
+            this.cboQtdeEstoque.TabIndex = 6;
             // 
             // cboTipoMov
             // 
@@ -366,14 +378,25 @@
             this.btoExcluir.UseVisualStyleBackColor = true;
             this.btoExcluir.Click += new System.EventHandler(this.btoExcluir_Click);
             // 
-            // cboQtdeEstoque
+            // txtNomePesquisar
             // 
-            this.cboQtdeEstoque.Enabled = false;
-            this.cboQtdeEstoque.FormattingEnabled = true;
-            this.cboQtdeEstoque.Location = new System.Drawing.Point(6, 72);
-            this.cboQtdeEstoque.Name = "cboQtdeEstoque";
-            this.cboQtdeEstoque.Size = new System.Drawing.Size(100, 23);
-            this.cboQtdeEstoque.TabIndex = 6;
+            this.txtNomePesquisar.Location = new System.Drawing.Point(12, 444);
+            this.txtNomePesquisar.Name = "txtNomePesquisar";
+            this.txtNomePesquisar.Size = new System.Drawing.Size(505, 23);
+            this.txtNomePesquisar.TabIndex = 3;
+            this.txtNomePesquisar.TextChanged += new System.EventHandler(this.txtNomePesquisar_TextChanged);
+            // 
+            // gridMovProduto
+            // 
+            this.gridMovProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridMovProduto.Location = new System.Drawing.Point(12, 473);
+            this.gridMovProduto.Name = "gridMovProduto";
+            this.gridMovProduto.ReadOnly = true;
+            this.gridMovProduto.RowTemplate.Height = 25;
+            this.gridMovProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridMovProduto.Size = new System.Drawing.Size(505, 148);
+            this.gridMovProduto.TabIndex = 4;
+            this.gridMovProduto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMovProduto_CellClick);
             // 
             // frmMovProduto
             // 
@@ -381,7 +404,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btoSair;
-            this.ClientSize = new System.Drawing.Size(529, 450);
+            this.ClientSize = new System.Drawing.Size(529, 633);
+            this.Controls.Add(this.gridMovProduto);
+            this.Controls.Add(this.txtNomePesquisar);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -395,7 +420,9 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtQtde)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridMovProduto)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -432,5 +459,7 @@
         private Label label11;
         private Label label10;
         private ComboBox cboQtdeEstoque;
+        private TextBox txtNomePesquisar;
+        private DataGridView gridMovProduto;
     }
 }

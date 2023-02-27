@@ -68,6 +68,38 @@ namespace MiniProjeto
             }
         }
 
+        private void CarregarGridProduto()
+        {
+            string sql = "select id_Produto as 'ID', " +
+                "nome_Produto as 'Nome', " +
+                "valorvenda_Produto as 'Valor venda', " +
+                "qtde_Produto as 'Quantidade', " +
+                "status_Produto as 'Status' " +
+                "from produto where " +
+                "nome_Produto like '%" + txtNomePesquisa.Text + "%'";
+
+            SqlConnection conn = new SqlConnection(stringConexao);
+            SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+            DataSet ds = new DataSet();
+            conn.Open();
+
+            try
+            {
+                adapter.Fill(ds);
+                gridProduto.DataSource = ds.Tables[0];
+                gridProduto.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                gridProduto.AutoResizeRow(0,DataGridViewAutoSizeRowMode.AllCellsExceptHeader);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         public frmProduto()
         {
             InitializeComponent();
@@ -82,6 +114,7 @@ namespace MiniProjeto
         {
             testeConexao();
             carregarComboBox();
+            CarregarGridProduto();
         }
 
         private void btoLimpar_Click(object sender, EventArgs e)
@@ -259,6 +292,7 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+            CarregarGridProduto();
         }
 
         /////////////////////
@@ -432,6 +466,7 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+            CarregarGridProduto();
         }
 
         ///////////////////
@@ -462,8 +497,18 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+            CarregarGridProduto();
         }
 
-        
+        private void txtNomePesquisa_TextChanged(object sender, EventArgs e)
+        {
+            CarregarGridProduto();
+        }
+
+        private void gridProduto_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtCodigo.Text = gridProduto.CurrentRow.Cells["ID"].Value.ToString();
+            btoPesquisar.PerformClick();
+        }
     }
 }
