@@ -44,7 +44,6 @@
             this.btoLimpar = new System.Windows.Forms.Button();
             this.btoSair = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cboStatus = new System.Windows.Forms.ComboBox();
@@ -53,7 +52,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtNomePesquisa = new System.Windows.Forms.TextBox();
             this.gridUsuario = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.txtId)).BeginInit();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -209,17 +208,10 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Código ID";
             // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(3, 53);
-            this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(60, 23);
-            this.txtId.TabIndex = 0;
-            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btoPesquisar);
             this.groupBox1.Controls.Add(this.txtId);
+            this.groupBox1.Controls.Add(this.btoPesquisar);
             this.groupBox1.Controls.Add(this.txtNome);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label6);
@@ -309,6 +301,13 @@
             this.gridUsuario.TabIndex = 5;
             this.gridUsuario.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridUsuario_CellClick);
             // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(3, 53);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(60, 23);
+            this.txtId.TabIndex = 3;
+            // 
             // frmUsuario
             // 
             this.AcceptButton = this.btoCadastrar;
@@ -324,7 +323,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Usuário";
             this.Load += new System.EventHandler(this.frmUsuario_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.txtId)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -354,7 +352,6 @@
         private Button btoLimpar;
         private Button btoSair;
         private Label label6;
-        private NumericUpDown txtId;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
         private ComboBox cboStatus;
@@ -363,5 +360,6 @@
         private GroupBox groupBox3;
         private TextBox txtNomePesquisa;
         private DataGridView gridUsuario;
+        private TextBox txtId;
     }
 }

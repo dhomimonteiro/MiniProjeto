@@ -148,6 +148,13 @@ namespace MiniProjeto
         // BOTÃO PESQUISAR //
         private void btoPesquisar_Click(object sender, EventArgs e)
         {
+            if (txtCodigo.Text.Trim() == "")
+            {
+                frmCategoriaPesquisa frm = new frmCategoriaPesquisa();
+                frm.ShowDialog();
+                txtCodigo.Text = frm._codigo;
+            }
+
             string sql = "select * from categoria where id_Categoria = " + txtCodigo.Text;
 
             SqlConnection conn = new SqlConnection(stringConexao);

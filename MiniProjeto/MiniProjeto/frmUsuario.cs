@@ -39,7 +39,7 @@ namespace MiniProjeto
         private void btoLimpar_Click(object sender, EventArgs e)
         {
 
-            txtId.Value = 0;
+            txtId.Text = "";
             txtNome.Text = "";
             txtLogin.Text = "";
             txtSenha.Text = "";
@@ -182,6 +182,13 @@ namespace MiniProjeto
         // BOTÃO PESQUISAR //
         private void btoPesquisar_Click(object sender, EventArgs e)
         {
+            if (txtId.Text.Trim() == "")
+            {
+                frmUsuarioPesquisa frm = new frmUsuarioPesquisa();
+                frm.ShowDialog();
+                txtId.Text = frm._codigo;
+            }
+            
             string sql = "select * from usuario where id_Usuario = " + txtId.Text;
 
             SqlConnection conn = new SqlConnection (stringConexao);

@@ -27,3 +27,6 @@ C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj
 C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj\Debug\net6.0-windows\MiniProjeto.frmMovProduto.resources
 C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj\Debug\net6.0-windows\MiniProjeto.MDI_Principal.resources
 C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj\Debug\net6.0-windows\MiniProjeto.frmLogin.resources
+C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj\Debug\net6.0-windows\MiniProjeto.frmUsuarioPesquisa.resources
+C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj\Debug\net6.0-windows\MiniProjeto.frmCategoriaPesquisa.resources
+C:\Users\dhomenica.mfsouza\source\repos\_MiniProjeto\MiniProjeto\MiniProjeto\obj\Debug\net6.0-windows\MiniProjeto.frmProdutoPesquisa.resources

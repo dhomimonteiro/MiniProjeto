@@ -248,64 +248,41 @@ namespace MiniProjeto
                 conn.Close();
             }
 
+            string sql2 = "";
             if (cboTipoMov.SelectedIndex == 0)
             {
-                string sqlAdicionar = "update produto set qtde_produto = qtde_produto + " + txtQtde.Text + " where id_Produto = " + cboCodigoProduto.Text;
-
-                //SqlConnection connAdd = new SqlConnection(stringConexao);
-                SqlCommand cmdAdd = new SqlCommand(sqlAdicionar, conn);
-                cmdAdd.CommandType = CommandType.Text;
-                conn.Open();
-
-                try
-                {
-                    int i = cmdAdd.ExecuteNonQuery();
-                    if (i == 1)
-                    {
-                        MessageBox.Show("Dados alterados com sucesso.");
-                        btoLimpar.PerformClick();
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    conn.Close();
-                }
+                sql2 = "update produto set qtde_produto = qtde_produto + " + txtQtde.Text + " where id_Produto = " + cboCodigoProduto.Text;
             }
             if (cboTipoMov.SelectedIndex == 1)
             {
-                string sqlRemover = "update produto set " +
+                sql2 = "update produto set " +
                     "qtde_Produto = qtde_Produto - " + txtQtde.Text + " where id_Produto = " +
                     cboCodigoProduto.Text;
+            }
+            SqlConnection connRm = new SqlConnection(stringConexao);
+            SqlCommand cmdRm = new SqlCommand(sql2, connRm);
+            cmdRm.CommandType = CommandType.Text;
+            connRm.Open();
 
-                SqlConnection connRm = new SqlConnection(stringConexao);
-                SqlCommand cmdRm = new SqlCommand(sqlRemover, connRm);
-                cmdRm.CommandType = CommandType.Text;
-                connRm.Open();
+            try
+            {
+                int i = cmdRm.ExecuteNonQuery();
+                if (i == 1)
+                {
+                    MessageBox.Show("Dados alterados com sucesso.");
+                    btoLimpar.PerformClick();
 
-                try
-                {
-                    int i = cmdRm.ExecuteNonQuery();
-                    if (i == 1)
-                    {
-                        MessageBox.Show("Dados alterados com sucesso.");
-                        btoLimpar.PerformClick();
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    connRm.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connRm.Close();
+            }
+            
         }
 
         /////////////////////

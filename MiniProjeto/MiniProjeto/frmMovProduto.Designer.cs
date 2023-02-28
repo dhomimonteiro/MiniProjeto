@@ -61,6 +61,8 @@
             this.btoExcluir = new System.Windows.Forms.Button();
             this.txtNomePesquisar = new System.Windows.Forms.TextBox();
             this.gridMovProduto = new System.Windows.Forms.DataGridView();
+            this.btoPesquisarUsuario = new System.Windows.Forms.Button();
+            this.btoPesquisarProduto = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtQtde)).BeginInit();
@@ -146,6 +148,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btoPesquisarProduto);
+            this.groupBox2.Controls.Add(this.btoPesquisarUsuario);
             this.groupBox2.Controls.Add(this.cboQtdeEstoque);
             this.groupBox2.Controls.Add(this.cboTipoMov);
             this.groupBox2.Controls.Add(this.cboCodigoProduto);
@@ -195,7 +199,7 @@
             // 
             this.cboCodigoProduto.Enabled = false;
             this.cboCodigoProduto.FormattingEnabled = true;
-            this.cboCodigoProduto.Location = new System.Drawing.Point(451, 28);
+            this.cboCodigoProduto.Location = new System.Drawing.Point(398, 30);
             this.cboCodigoProduto.Name = "cboCodigoProduto";
             this.cboCodigoProduto.Size = new System.Drawing.Size(48, 23);
             this.cboCodigoProduto.TabIndex = 4;
@@ -204,7 +208,7 @@
             // 
             this.cboCodigoUsuario.Enabled = false;
             this.cboCodigoUsuario.FormattingEnabled = true;
-            this.cboCodigoUsuario.Location = new System.Drawing.Point(202, 28);
+            this.cboCodigoUsuario.Location = new System.Drawing.Point(148, 28);
             this.cboCodigoUsuario.Name = "cboCodigoUsuario";
             this.cboCodigoUsuario.Size = new System.Drawing.Size(48, 23);
             this.cboCodigoUsuario.TabIndex = 4;
@@ -212,9 +216,9 @@
             // cboNomeProduto
             // 
             this.cboNomeProduto.FormattingEnabled = true;
-            this.cboNomeProduto.Location = new System.Drawing.Point(256, 28);
+            this.cboNomeProduto.Location = new System.Drawing.Point(256, 30);
             this.cboNomeProduto.Name = "cboNomeProduto";
-            this.cboNomeProduto.Size = new System.Drawing.Size(189, 23);
+            this.cboNomeProduto.Size = new System.Drawing.Size(136, 23);
             this.cboNomeProduto.TabIndex = 4;
             // 
             // cboNomeUsuario
@@ -222,13 +226,13 @@
             this.cboNomeUsuario.FormattingEnabled = true;
             this.cboNomeUsuario.Location = new System.Drawing.Point(6, 28);
             this.cboNomeUsuario.Name = "cboNomeUsuario";
-            this.cboNomeUsuario.Size = new System.Drawing.Size(190, 23);
+            this.cboNomeUsuario.Size = new System.Drawing.Size(136, 23);
             this.cboNomeUsuario.TabIndex = 4;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(451, 10);
+            this.label11.Location = new System.Drawing.Point(399, 12);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(43, 15);
             this.label11.TabIndex = 0;
@@ -237,7 +241,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(202, 10);
+            this.label10.Location = new System.Drawing.Point(148, 10);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(41, 15);
             this.label10.TabIndex = 0;
@@ -398,6 +402,24 @@
             this.gridMovProduto.TabIndex = 4;
             this.gridMovProduto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMovProduto_CellClick);
             // 
+            // btoPesquisarUsuario
+            // 
+            this.btoPesquisarUsuario.Location = new System.Drawing.Point(202, 28);
+            this.btoPesquisarUsuario.Name = "btoPesquisarUsuario";
+            this.btoPesquisarUsuario.Size = new System.Drawing.Size(48, 23);
+            this.btoPesquisarUsuario.TabIndex = 7;
+            this.btoPesquisarUsuario.Text = "...";
+            this.btoPesquisarUsuario.UseVisualStyleBackColor = true;
+            // 
+            // btoPesquisarProduto
+            // 
+            this.btoPesquisarProduto.Location = new System.Drawing.Point(451, 29);
+            this.btoPesquisarProduto.Name = "btoPesquisarProduto";
+            this.btoPesquisarProduto.Size = new System.Drawing.Size(48, 23);
+            this.btoPesquisarProduto.TabIndex = 7;
+            this.btoPesquisarProduto.Text = "...";
+            this.btoPesquisarProduto.UseVisualStyleBackColor = true;
+            // 
             // frmMovProduto
             // 
             this.AcceptButton = this.btoCadastrar;
@@ -461,5 +483,7 @@
         private ComboBox cboQtdeEstoque;
         private TextBox txtNomePesquisar;
         private DataGridView gridMovProduto;
+        private Button btoPesquisarProduto;
+        private Button btoPesquisarUsuario;
     }
 }
