@@ -103,12 +103,16 @@ namespace MiniProjeto
         private void CarregarGridMovProduto()
         {
             string sql = "select " +
-                "id_MovProduto as 'ID', " +
-                "tipo_MovProduto as 'Movimento', " +
-                "qtde_MovProduto as 'Quantidade', " +
-                "status_MovProduto as 'Status' " +
-                "from MovProduto where " +
-                "tipo_MovProduto like '%" + txtNomePesquisar.Text + "%'";
+                "MovProduto.id_MovProduto as 'ID', " +
+                "MovProduto.tipo_MovProduto as 'Movimento', " +
+                "Usuario.nome_Usuario as 'Usuário', " +
+                "Produto.nome_Produto as 'Produto', " +
+                "MovProduto.qtde_MovProduto as 'Quantidade', " +
+                "MovProduto.status_MovProduto as 'Status' " +
+                "from MovProduto " +
+                "inner join produto on MovProduto.id_Produto_MovProduto = produto.id_Produto " +
+                "inner join usuario on MovProduto.id_Usuario_MovProduto = usuario.id_Usuario " +
+                "where produto.nome_produto = '" + cboNomeProduto.Text + "' order by id_MovProduto desc";
 
             SqlConnection conn = new SqlConnection(stringConexao);
             SqlDataAdapter adapter = new SqlDataAdapter(sql,conn);
@@ -161,7 +165,6 @@ namespace MiniProjeto
             cboTipoMov.SelectedIndex = -1;
             txtQtde.Value = 0;
             txtData.Text = "";
-            cboStatus.SelectedIndex = -1;
             txtObs.Text = "";
         }
 
@@ -195,12 +198,9 @@ namespace MiniProjeto
                 MessageBox.Show("A quantidade deve ser maior que 0.");
                 txtQtde.Focus();
                 return;
-            }else if (cboStatus.SelectedIndex == -1)
-            {
-                MessageBox.Show("Selecione o status.");
-                cboStatus.Focus();
-                return;
             }
+
+            cboStatus.SelectedIndex = 0;
 
             string sql = "insert into MovProduto" +
                 "(" +
@@ -270,7 +270,7 @@ namespace MiniProjeto
                 if (i == 1)
                 {
                     MessageBox.Show("Dados alterados com sucesso.");
-                    btoLimpar.PerformClick();
+                    btoPesquisar.PerformClick();
 
                 }
             }
@@ -282,13 +282,22 @@ namespace MiniProjeto
             {
                 connRm.Close();
             }
-            
+            CarregarGridMovProduto();
+            carregarComboBoxProduto();
+
         }
 
         /////////////////////
         // BOTÃO PESQUISAR //
         private void btoPesquisar_Click(object sender, EventArgs e)
         {
+            if (txtCodigo.Text.Trim() == "")
+            {
+                frmMovProdutoPesquisa frm = new frmMovProdutoPesquisa();
+                frm.ShowDialog();
+                txtCodigo.Text = frm._codigo;
+            }
+
             string sql = "select * from MovProduto where id_MovProduto = " + txtCodigo.Text;
 
             SqlConnection conn = new SqlConnection(stringConexao);
@@ -322,17 +331,30 @@ namespace MiniProjeto
         }
 
         ///////////////////
-        // BOTÃO ALTERAR //
-        private void btoAlterar_Click(object sender, EventArgs e)
+        // BOTÃO CANCELAR //
+        private void btoCancelar_Click(object sender, EventArgs e)
         {
-            string sql = "update MovProduto set " +
-                "id_Produto_MovProduto = '" + cboCodigoProduto.Text + "'," +
-                "id_Usuario_MovProduto = '" + cboCodigoUsuario.Text + "'," +
-                "qtde_MovProduto = '" + txtQtde.Text + "'," +
-                "dataCadastro_MovProduto = '" + txtData.Text + "'," +
-                "obs_MovProduto = '" + txtObs.Text + "'," +
-                "status_MovProduto = '" + cboStatus.Text + "' " +
-                "where id_MovProduto = " + txtCodigo.Text;
+            btoPesquisar.PerformClick();
+            cboStatus.SelectedIndex = 1;
+            
+
+            //Alteração na tabela de produto 
+            string sql = "";
+            if (cboTipoMov.SelectedIndex == 0)
+            {
+                sql = "update produto set qtde_produto = qtde_produto - " + txtQtde.Text + " where id_Produto = " + 
+                    cboCodigoProduto.Text + "; " +
+                    "update MovProduto set status_MovProduto = '" + cboStatus.Text + "' where id_MovProduto = " +
+                    txtCodigo.Text;
+            }
+            if (cboTipoMov.SelectedIndex == 1)
+            {
+                sql = "update produto set " +
+                    "qtde_Produto = qtde_Produto + " + txtQtde.Text + " where id_Produto = " +
+                    cboCodigoProduto.Text + "; " +
+                    "update MovProduto set status_MovProduto = '" + cboStatus.Text + "' where id_MovProduto = " +
+                    txtCodigo.Text;
+            }
 
             SqlConnection conn = new SqlConnection(stringConexao);
             SqlCommand cmd = new SqlCommand(sql, conn);
@@ -342,9 +364,9 @@ namespace MiniProjeto
             try
             {
                 int i = cmd.ExecuteNonQuery();
-                if (i == 1)
+                if (i == 2)
                 {
-                    MessageBox.Show("Dados alterados com sucesso.");
+                    MessageBox.Show("Movimentação cancelada com sucesso.");
                     btoPesquisar.PerformClick();
                 }
             }
@@ -356,37 +378,10 @@ namespace MiniProjeto
             {
                 conn.Close();
             }
+            CarregarGridMovProduto();
+            carregarComboBoxProduto();
         }
 
-        ///////////////////
-        // BOTÃO EXCLUIR //
-        private void btoExcluir_Click(object sender, EventArgs e)
-        {
-            string sql = "delete from MovProduto where id_MovProduto = " + txtCodigo.Text;
-
-            SqlConnection conn = new SqlConnection(stringConexao);
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.CommandType = CommandType.Text;
-            conn.Open();
-
-            try
-            {
-                int i = cmd.ExecuteNonQuery();
-                if (i == 1)
-                {
-                    MessageBox.Show("Dados excluídos com sucesso.");
-                    btoLimpar.PerformClick();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
 
         private void txtNomePesquisar_TextChanged(object sender, EventArgs e)
         {
@@ -397,6 +392,98 @@ namespace MiniProjeto
         {
             txtCodigo.Text = gridMovProduto.CurrentRow.Cells["ID"].Value.ToString();
             btoPesquisar.PerformClick();
+        }
+
+        // PREENCHER O CAMPO NOME DO USUÁRIO COM BASE NO CÓDIGO DIGITADO
+        private void btoPesquisarUsuario_Enter(object sender, EventArgs e)
+        {
+            if (cboCodigoUsuario.Text.Trim() != "")
+            {
+                string sql = "select * from usuario where id_Usuario = " + cboCodigoUsuario.Text;
+
+                SqlConnection conn = new SqlConnection(stringConexao);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.CommandType = CommandType.Text;
+                SqlDataReader leitura;
+                conn.Open();
+
+                try
+                {
+                    leitura = cmd.ExecuteReader();
+                    if (leitura.Read())
+                    {
+                        cboNomeUsuario.Text = leitura[1].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+            
+        }
+
+        //Abrir o DataGrid do Usuário para pesquisa
+        private void btoPesquisarUsuario_Click(object sender, EventArgs e)
+        {
+            frmUsuarioPesquisa frm = new frmUsuarioPesquisa();
+            frm.ShowDialog();
+            cboCodigoUsuario.Text = frm._codigo;
+        }
+
+        private void btoPesquisarProduto_Click(object sender, EventArgs e)
+        {
+            frmProdutoPesquisa frm = new frmProdutoPesquisa();
+            frm.ShowDialog();
+            cboCodigoProduto.Text = frm._codigo;
+        }
+
+        private void btoPesquisarProduto_Enter(object sender, EventArgs e)
+        {
+            if (cboCodigoProduto.Text.Trim() != "")
+            {
+                string sql = "select * from produto where id_Produto = " + cboCodigoProduto.Text;
+
+                SqlConnection conn = new SqlConnection(stringConexao);
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.CommandType = CommandType.Text;
+                SqlDataReader leitura;
+                conn.Open();
+
+                try
+                {
+                    leitura = cmd.ExecuteReader();
+                    if (leitura.Read())
+                    {
+                        cboNomeProduto.Text = leitura[1].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        private void cboNomeProduto_Leave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void cboNomeProduto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboNomeProduto.Text.Trim() != "")
+            {
+                CarregarGridMovProduto();
+            }
         }
     }
 }

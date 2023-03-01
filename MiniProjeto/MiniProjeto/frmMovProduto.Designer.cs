@@ -37,6 +37,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btoPesquisarProduto = new System.Windows.Forms.Button();
+            this.btoPesquisarUsuario = new System.Windows.Forms.Button();
             this.cboQtdeEstoque = new System.Windows.Forms.ComboBox();
             this.cboTipoMov = new System.Windows.Forms.ComboBox();
             this.cboCodigoProduto = new System.Windows.Forms.ComboBox();
@@ -54,15 +56,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btoCancelar = new System.Windows.Forms.Button();
             this.btoCadastrar = new System.Windows.Forms.Button();
-            this.btoAlterar = new System.Windows.Forms.Button();
             this.btoLimpar = new System.Windows.Forms.Button();
             this.btoSair = new System.Windows.Forms.Button();
-            this.btoExcluir = new System.Windows.Forms.Button();
             this.txtNomePesquisar = new System.Windows.Forms.TextBox();
             this.gridMovProduto = new System.Windows.Forms.DataGridView();
-            this.btoPesquisarUsuario = new System.Windows.Forms.Button();
-            this.btoPesquisarProduto = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtQtde)).BeginInit();
@@ -174,6 +173,28 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
+            // btoPesquisarProduto
+            // 
+            this.btoPesquisarProduto.Location = new System.Drawing.Point(451, 29);
+            this.btoPesquisarProduto.Name = "btoPesquisarProduto";
+            this.btoPesquisarProduto.Size = new System.Drawing.Size(48, 23);
+            this.btoPesquisarProduto.TabIndex = 5;
+            this.btoPesquisarProduto.Text = "...";
+            this.btoPesquisarProduto.UseVisualStyleBackColor = true;
+            this.btoPesquisarProduto.Click += new System.EventHandler(this.btoPesquisarProduto_Click);
+            this.btoPesquisarProduto.Enter += new System.EventHandler(this.btoPesquisarProduto_Enter);
+            // 
+            // btoPesquisarUsuario
+            // 
+            this.btoPesquisarUsuario.Location = new System.Drawing.Point(202, 28);
+            this.btoPesquisarUsuario.Name = "btoPesquisarUsuario";
+            this.btoPesquisarUsuario.Size = new System.Drawing.Size(48, 23);
+            this.btoPesquisarUsuario.TabIndex = 2;
+            this.btoPesquisarUsuario.Text = "...";
+            this.btoPesquisarUsuario.UseVisualStyleBackColor = true;
+            this.btoPesquisarUsuario.Click += new System.EventHandler(this.btoPesquisarUsuario_Click);
+            this.btoPesquisarUsuario.Enter += new System.EventHandler(this.btoPesquisarUsuario_Enter);
+            // 
             // cboQtdeEstoque
             // 
             this.cboQtdeEstoque.Enabled = false;
@@ -181,7 +202,7 @@
             this.cboQtdeEstoque.Location = new System.Drawing.Point(6, 72);
             this.cboQtdeEstoque.Name = "cboQtdeEstoque";
             this.cboQtdeEstoque.Size = new System.Drawing.Size(100, 23);
-            this.cboQtdeEstoque.TabIndex = 6;
+            this.cboQtdeEstoque.TabIndex = 111;
             // 
             // cboTipoMov
             // 
@@ -193,11 +214,10 @@
             this.cboTipoMov.Location = new System.Drawing.Point(112, 72);
             this.cboTipoMov.Name = "cboTipoMov";
             this.cboTipoMov.Size = new System.Drawing.Size(129, 23);
-            this.cboTipoMov.TabIndex = 5;
+            this.cboTipoMov.TabIndex = 6;
             // 
             // cboCodigoProduto
             // 
-            this.cboCodigoProduto.Enabled = false;
             this.cboCodigoProduto.FormattingEnabled = true;
             this.cboCodigoProduto.Location = new System.Drawing.Point(398, 30);
             this.cboCodigoProduto.Name = "cboCodigoProduto";
@@ -206,12 +226,11 @@
             // 
             // cboCodigoUsuario
             // 
-            this.cboCodigoUsuario.Enabled = false;
             this.cboCodigoUsuario.FormattingEnabled = true;
             this.cboCodigoUsuario.Location = new System.Drawing.Point(148, 28);
             this.cboCodigoUsuario.Name = "cboCodigoUsuario";
             this.cboCodigoUsuario.Size = new System.Drawing.Size(48, 23);
-            this.cboCodigoUsuario.TabIndex = 4;
+            this.cboCodigoUsuario.TabIndex = 1;
             // 
             // cboNomeProduto
             // 
@@ -219,7 +238,9 @@
             this.cboNomeProduto.Location = new System.Drawing.Point(256, 30);
             this.cboNomeProduto.Name = "cboNomeProduto";
             this.cboNomeProduto.Size = new System.Drawing.Size(136, 23);
-            this.cboNomeProduto.TabIndex = 4;
+            this.cboNomeProduto.TabIndex = 3;
+            this.cboNomeProduto.SelectedIndexChanged += new System.EventHandler(this.cboNomeProduto_SelectedIndexChanged);
+            this.cboNomeProduto.Leave += new System.EventHandler(this.cboNomeProduto_Leave);
             // 
             // cboNomeUsuario
             // 
@@ -227,7 +248,7 @@
             this.cboNomeUsuario.Location = new System.Drawing.Point(6, 28);
             this.cboNomeUsuario.Name = "cboNomeUsuario";
             this.cboNomeUsuario.Size = new System.Drawing.Size(136, 23);
-            this.cboNomeUsuario.TabIndex = 4;
+            this.cboNomeUsuario.TabIndex = 0;
             // 
             // label11
             // 
@@ -250,6 +271,7 @@
             // cboStatus
             // 
             this.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStatus.Enabled = false;
             this.cboStatus.FormattingEnabled = true;
             this.cboStatus.Items.AddRange(new object[] {
             "Ativo",
@@ -257,14 +279,14 @@
             this.cboStatus.Location = new System.Drawing.Point(363, 72);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(131, 23);
-            this.cboStatus.TabIndex = 2;
+            this.cboStatus.TabIndex = 8;
             // 
             // txtQtde
             // 
             this.txtQtde.Location = new System.Drawing.Point(247, 73);
             this.txtQtde.Name = "txtQtde";
             this.txtQtde.Size = new System.Drawing.Size(110, 23);
-            this.txtQtde.TabIndex = 0;
+            this.txtQtde.TabIndex = 7;
             // 
             // txtObs
             // 
@@ -272,7 +294,7 @@
             this.txtObs.Multiline = true;
             this.txtObs.Name = "txtObs";
             this.txtObs.Size = new System.Drawing.Size(493, 79);
-            this.txtObs.TabIndex = 3;
+            this.txtObs.TabIndex = 9;
             // 
             // label6
             // 
@@ -321,36 +343,35 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btoCancelar);
             this.groupBox3.Controls.Add(this.btoCadastrar);
-            this.groupBox3.Controls.Add(this.btoAlterar);
             this.groupBox3.Controls.Add(this.btoLimpar);
             this.groupBox3.Controls.Add(this.btoSair);
-            this.groupBox3.Controls.Add(this.btoExcluir);
             this.groupBox3.Location = new System.Drawing.Point(12, 330);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(505, 108);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             // 
+            // btoCancelar
+            // 
+            this.btoCancelar.Location = new System.Drawing.Point(399, 22);
+            this.btoCancelar.Name = "btoCancelar";
+            this.btoCancelar.Size = new System.Drawing.Size(93, 36);
+            this.btoCancelar.TabIndex = 5;
+            this.btoCancelar.Text = "&Cancelar";
+            this.btoCancelar.UseVisualStyleBackColor = true;
+            this.btoCancelar.Click += new System.EventHandler(this.btoCancelar_Click);
+            // 
             // btoCadastrar
             // 
-            this.btoCadastrar.Location = new System.Drawing.Point(155, 22);
+            this.btoCadastrar.Location = new System.Drawing.Point(297, 22);
             this.btoCadastrar.Name = "btoCadastrar";
             this.btoCadastrar.Size = new System.Drawing.Size(95, 36);
             this.btoCadastrar.TabIndex = 0;
             this.btoCadastrar.Text = "Cadastrar";
             this.btoCadastrar.UseVisualStyleBackColor = true;
             this.btoCadastrar.Click += new System.EventHandler(this.btoCadastrar_Click);
-            // 
-            // btoAlterar
-            // 
-            this.btoAlterar.Location = new System.Drawing.Point(279, 22);
-            this.btoAlterar.Name = "btoAlterar";
-            this.btoAlterar.Size = new System.Drawing.Size(95, 36);
-            this.btoAlterar.TabIndex = 1;
-            this.btoAlterar.Text = "&Alterar";
-            this.btoAlterar.UseVisualStyleBackColor = true;
-            this.btoAlterar.Click += new System.EventHandler(this.btoAlterar_Click);
             // 
             // btoLimpar
             // 
@@ -372,16 +393,6 @@
             this.btoSair.UseVisualStyleBackColor = true;
             this.btoSair.Click += new System.EventHandler(this.btoSair_Click);
             // 
-            // btoExcluir
-            // 
-            this.btoExcluir.Location = new System.Drawing.Point(399, 22);
-            this.btoExcluir.Name = "btoExcluir";
-            this.btoExcluir.Size = new System.Drawing.Size(95, 36);
-            this.btoExcluir.TabIndex = 2;
-            this.btoExcluir.Text = "&Excluir";
-            this.btoExcluir.UseVisualStyleBackColor = true;
-            this.btoExcluir.Click += new System.EventHandler(this.btoExcluir_Click);
-            // 
             // txtNomePesquisar
             // 
             this.txtNomePesquisar.Location = new System.Drawing.Point(12, 444);
@@ -401,24 +412,6 @@
             this.gridMovProduto.Size = new System.Drawing.Size(505, 148);
             this.gridMovProduto.TabIndex = 4;
             this.gridMovProduto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridMovProduto_CellClick);
-            // 
-            // btoPesquisarUsuario
-            // 
-            this.btoPesquisarUsuario.Location = new System.Drawing.Point(202, 28);
-            this.btoPesquisarUsuario.Name = "btoPesquisarUsuario";
-            this.btoPesquisarUsuario.Size = new System.Drawing.Size(48, 23);
-            this.btoPesquisarUsuario.TabIndex = 7;
-            this.btoPesquisarUsuario.Text = "...";
-            this.btoPesquisarUsuario.UseVisualStyleBackColor = true;
-            // 
-            // btoPesquisarProduto
-            // 
-            this.btoPesquisarProduto.Location = new System.Drawing.Point(451, 29);
-            this.btoPesquisarProduto.Name = "btoPesquisarProduto";
-            this.btoPesquisarProduto.Size = new System.Drawing.Size(48, 23);
-            this.btoPesquisarProduto.TabIndex = 7;
-            this.btoPesquisarProduto.Text = "...";
-            this.btoPesquisarProduto.UseVisualStyleBackColor = true;
             // 
             // frmMovProduto
             // 
@@ -467,10 +460,8 @@
         private TextBox txtObs;
         private Label label6;
         private Button btoCadastrar;
-        private Button btoAlterar;
         private Button btoLimpar;
         private Button btoSair;
-        private Button btoExcluir;
         private ComboBox cboTipoMov;
         private Label label9;
         private Label label8;
@@ -485,5 +476,6 @@
         private DataGridView gridMovProduto;
         private Button btoPesquisarProduto;
         private Button btoPesquisarUsuario;
+        private Button btoCancelar;
     }
 }
